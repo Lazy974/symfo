@@ -11,18 +11,6 @@
 // start the Stimulus application
 // import './bootstrap';
 
-import React from "react";
-import Home from "./src/pages/home";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { createRoot } from "react-dom/client";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-]);
-
-const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(<RouterProvider router={router} />);
+import "tailwindcss/tailwind.css";
+import Router from "./src/middleware/router";
+Router();
