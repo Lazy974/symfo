@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "run-p start:**",
     "start:symfony": "cd backend && npm run symfony",
-    "start:react": "cd backend && npm run react"
+    "start:react": "cd backend && npm run react",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
