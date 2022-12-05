@@ -7,6 +7,7 @@
     "start": "run-p start:**",
     "start:symfony": "cd backend && npm run symfony",
     "start:react": "cd backend && npm run react",
+    "start:tailwind": "cd frontend && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
