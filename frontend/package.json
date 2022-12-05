@@ -2,12 +2,7 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "start": "run-p start:**",
-        "start:symfony": "symfony serve",
-        "start:react": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress"
+        "start": "npx tailwindcss -i ./src/assets/styles.css -o ../backend/public/assets/css/styles.css --watch"
     },
     "devDependencies": {
         "@babel/core": "^7.17.0",
