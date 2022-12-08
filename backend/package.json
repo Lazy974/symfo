@@ -2,10 +2,7 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-<<<<<<< HEAD
-=======
         "start": "run-p start:**",
->>>>>>> a3067fc583b3ec3d37cb94f03220293a422896bd
         "symfony": "symfony serve",
         "react": "encore dev-server",
         "dev": "encore dev",
