@@ -11,10 +11,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
-
-        // create 20 products! Bam!
+        // create 20 products
         for ($i = 0; $i < 20; $i++) {
             $product = new Product();
             $product->setName('product '.$i);
@@ -23,6 +20,7 @@ class AppFixtures extends Fixture
             $manager->persist($product);
         }
 
+        // create 10 clients
         for ($i=0; $i < 10 ; $i++) { 
             $client = new Client();
             $client->setFullName('fullname' .$i);

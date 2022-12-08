@@ -54,13 +54,22 @@ const GetAllProducts = () => {
                       <td>{product.description}</td>
                       <td>{product.price}€</td>
                       <td>
-                        <Link to={`${URL_PRODUCT_SHOW}/${product.id}`}>
+                        <Link
+                          className="text-blue-500"
+                          to={`${URL_PRODUCT_SHOW}/${product.id}`}
+                        >
                           Afficher
                         </Link>
-                        <Link to={`${URL_PRODUCT_EDIT}/${product.id}`}>
+                        <Link
+                          className="text-green-500"
+                          to={`${URL_PRODUCT_EDIT}/${product.id}`}
+                        >
                           Editer
                         </Link>
-                        <button onClick={() => DeleteProduct(product.id)}>
+                        <button
+                          className="text-red-500"
+                          onClick={() => DeleteProduct(product.id)}
+                        >
                           Supprimer
                         </button>
                       </td>
