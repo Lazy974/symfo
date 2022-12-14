@@ -6,6 +6,7 @@ import Client from "../../pages/client";
 import Product from "../../pages/product";
 
 // ADMIN COMPONENTS
+import DashBoard from "../../pages/dashboard";
 import Users from "../../pages/admin/users";
 
 // PRODUCT ENTITY
@@ -23,6 +24,10 @@ export const Provider = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoard />,
   },
   {
     path: "/users",

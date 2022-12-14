@@ -12,6 +12,8 @@ import DeleteProduct from "./deleteProduct";
 
 const GetAllProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
+  const token =
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzEwMzkxOTQsImV4cCI6MTY3MTA0Mjc5NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdEB0ZXN0LmZyIn0.KgiTFlx5hHiBS1jtbGkqGjft5EHlFO0ueTYQEei95tPw7xRhfI67IpP-CcqoiqRWQeYztOL9K9I0GNxYjoMaIYsTHBSFebyXWgW_v2143FJvtLhbY9cRCKF7SQD6Qxyjwl7gvSiFoVU86zu5-_nqMjrvJsQDGNLg_j93c3xg2K0USznIXKfOzvqx2X6edeH8IJehibvyp0goGOZJqvvWIjfsgNF66Jp7inV1KS7TNMx8NT9Kc_-D6vTrnBvr09lbwfCI3UjSCZEwdtxjslXXm4Q9bsbu2u52APbg8i-_dTGGXWw0x_jR65FbNDek8pYQXsTrtfE-rrJcB9Zqb7YJ1Q";
 
   useEffect(() => {
     fetchProducts();
@@ -19,7 +21,11 @@ const GetAllProducts = () => {
 
   const fetchProducts = async () => {
     await axios
-      .get(`${URL_PRODUCT}`)
+      .get(`${URL_PRODUCT}`, {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      })
       .then((response) => {
         setAllProducts(response.data["hydra:member"]);
       })

@@ -3,7 +3,8 @@
 {% block title %}Hello DashBoardController!{% endblock %}
 
 {% block body %}
-{% if app.user %}
-    <p>Username: {{ app.user.email }}</p>
-{% endif %}
+    <script>
+        window.user = {{ user|raw }};
+    </script>
+    <div id="root"></div>
 {% endblock %}
