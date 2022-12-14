@@ -28,6 +28,8 @@ const GetAllProducts = () => {
       });
   };
 
+  const isAdmin = false;
+
   return (
     <>
       <h1 className="text-red-500">Liste des produits</h1>
@@ -60,18 +62,24 @@ const GetAllProducts = () => {
                         >
                           Afficher
                         </Link>
-                        <Link
-                          className="text-green-500"
-                          to={`${URL_PRODUCT_EDIT}/${product.id}`}
-                        >
-                          Editer
-                        </Link>
-                        <button
-                          className="text-red-500"
-                          onClick={() => DeleteProduct(product.id)}
-                        >
-                          Supprimer
-                        </button>
+                        {isAdmin === true ? (
+                          <>
+                            <Link
+                              className="text-green-500"
+                              to={`${URL_PRODUCT_EDIT}/${product.id}`}
+                            >
+                              Editer
+                            </Link>
+                            <button
+                              className="text-red-500"
+                              onClick={() => DeleteProduct(product.id)}
+                            >
+                              Supprimer
+                            </button>
+                          </>
+                        ) : (
+                          ""
+                        )}
                       </td>
                     </tr>
                   );

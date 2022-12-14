@@ -58,10 +58,6 @@ const EditProduct = () => {
   }, []);
 
   const submitEdit = () => {
-    setProduct({
-      ...product,
-      isSaving: true,
-    });
     let formData = {
       name: product.name,
       description: product.description,
@@ -76,10 +72,6 @@ const EditProduct = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        setProduct({
-          ...product,
-          isSaving: false,
-        });
       })
       .catch(function (error) {
         Swal.fire({
@@ -87,10 +79,6 @@ const EditProduct = () => {
           title: "Erreur !",
           showConfirmButton: false,
           timer: 1500,
-        });
-        setProduct({
-          ...product,
-          isSaving: false,
         });
       });
   };

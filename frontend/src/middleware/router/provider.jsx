@@ -5,6 +5,9 @@ import Home from "../../pages/home";
 import Client from "../../pages/client";
 import Product from "../../pages/product";
 
+// ADMIN COMPONENTS
+import Users from "../../pages/admin/users";
+
 // PRODUCT ENTITY
 import CreateProduct from "../../pages/product/functions/createProduct";
 import EditProduct from "../../pages/product/functions/editProduct";
@@ -20,6 +23,10 @@ export const Provider = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/users",
+    element: <Users />,
   },
   {
     path: "/clients",
