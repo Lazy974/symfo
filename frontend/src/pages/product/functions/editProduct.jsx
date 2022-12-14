@@ -65,7 +65,7 @@ const EditProduct = () => {
     };
     axios
       .put(`${URL_PRODUCT}/${product.id}`, formData)
-      .then(function (response) {
+      .then((response) => {
         Swal.fire({
           icon: "success",
           title: "Projet mis à jour !",
@@ -73,7 +73,7 @@ const EditProduct = () => {
           timer: 1500,
         });
       })
-      .catch(function (error) {
+      .catch((error) => {
         Swal.fire({
           icon: "error",
           title: "Erreur !",
