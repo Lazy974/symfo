@@ -3,13 +3,21 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { URL_USERS } from "../../../middleware/environment";
+import { token } from "../../../middleware/environment";
 
 const Users = () => {
   const [users, getUsers] = useState([]);
 
+  const headers = {
+    Authorization: `bearer ${token.get("access_token")}`,
+  };
+
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/users")
+      .get(`${URL_USERS}`, {
+        headers: headers,
+      })
       .then((response) => {
         getUsers(response.data["hydra:member"]);
       })

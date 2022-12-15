@@ -19,7 +19,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/users', name:'app_users')]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('ROLE_ADMIN')]
     public function users(): Response
     {
         return $this->render('admin/index.html.twig', [

@@ -38,7 +38,7 @@ const CreateProduct = () => {
       ...product,
       isSaving: true,
     });
-    let formData = {
+    const formData = {
       name: product.name,
       description: product.description,
       price: product.price,

@@ -1,3 +1,11 @@
+import { Cookies } from "react-cookie";
+
+// TOKEN
+export const token = new Cookies();
+export const CHECK_TOKEN = "https://localhost:8000/api/login_check";
+
+// USERS URL
+export const URL_USERS = "https://localhost:8000/api/users";
 // CLIENT URL
 export const URL_CLIENT = "https://localhost:8000/api/clients";
 export const URL_CLIENT_ALL = "/clients";

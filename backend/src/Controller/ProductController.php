@@ -27,10 +27,11 @@ class ProductController extends AbstractController
     }
 
     #[Route('/products/show/{id}', name: 'app_product_show')]
-    public function show(): Response
+    public function show(SerializerInterface $serializer): Response
     {
         return $this->render('product/index.html.twig', [
             'controller_name' => 'ProductController',
+            'user' => $serializer->serialize($this->getUser(), 'jsonld')
         ]);
     }
 

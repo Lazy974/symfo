@@ -8,6 +8,7 @@ import {
   URL_PRODUCT_ALL,
   URL_PRODUCT_EDIT,
 } from "../../../middleware/environment";
+import { token } from "../../../middleware/environment";
 
 const ShowProduct = () => {
   const [product, getProduct] = useState({
@@ -19,13 +20,17 @@ const ShowProduct = () => {
     price: "",
   });
 
+  const headers = {
+    Authorization: `bearer ${token.get("access_token")}`,
+  };
+
   useEffect(() => {
     axios
-      .get(`${URL_PRODUCT}/${product.id}`)
-      .then(function (response) {
+      .get(`${URL_PRODUCT}/${product.id}`, { headers: headers })
+      .then((response) => {
         getProduct(response.data);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }, []);
