@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { URL_PRODUCT, URL_PRODUCT_ALL } from "../../../middleware/environment";
+import process from "process";
 
 const CreateProduct = () => {
   const [product, setProduct] = useState({
@@ -44,7 +44,7 @@ const CreateProduct = () => {
       price: product.price,
     };
     await axios
-      .post(`${URL_PRODUCT}`, formData)
+      .post(`${process.env.URL_PRODUCT}`, formData)
       .then(function (response) {
         Swal.fire({
           icon: "success",
@@ -79,7 +79,7 @@ const CreateProduct = () => {
       <h2>Créer un nouveau projet</h2>
       <div>
         <div>
-          <Link to={`${URL_PRODUCT_ALL}`}>Voir tous les projets</Link>
+          <Link to={`${process.env.URL_PRODUCT_ALL}`}>Voir tous les projets</Link>
         </div>
         <div>
           <form>

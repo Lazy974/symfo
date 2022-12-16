@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { URL_PRODUCT, URL_PRODUCT_ALL } from "../../../middleware/environment";
 
 const EditProduct = () => {
   const [product, setProduct] = useState({
@@ -38,7 +37,7 @@ const EditProduct = () => {
 
   useEffect(() => {
     axios
-      .get(`${URL_PRODUCT}/${product.id}`)
+      .get(`${process.env.URL_PRODUCT}/${product.id}`)
       .then(function (response) {
         setProduct({
           ...product,
@@ -64,7 +63,7 @@ const EditProduct = () => {
       price: product.price,
     };
     axios
-      .put(`${URL_PRODUCT}/${product.id}`, formData)
+      .put(`${process.env.URL_PRODUCT}/${product.id}`, formData)
       .then((response) => {
         Swal.fire({
           icon: "success",
@@ -88,7 +87,7 @@ const EditProduct = () => {
       <h2>Editer le projet {product.name}</h2>
       <div>
         <div>
-          <Link to={`${URL_PRODUCT_ALL}`}>Voir tous les projets</Link>
+          <Link to={`${process.env.URL_PRODUCT_ALL}`}>Voir tous les projets</Link>
         </div>
         <div>
           <form>

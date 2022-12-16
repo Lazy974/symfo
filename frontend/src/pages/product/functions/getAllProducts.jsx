@@ -2,20 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import {
-  URL_PRODUCT,
-  URL_PRODUCT_CREATE,
-  URL_PRODUCT_SHOW,
-  URL_PRODUCT_EDIT,
-} from "../../../middleware/environment";
 import DeleteProduct from "./deleteProduct";
-import { token } from "../../../middleware/environment";
+import { AuthToken } from "../../../middleware/token/authToken";
+import process from "process";
 
 const GetAllProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
 
   const headers = {
-    Authorization: `bearer ${token.get("access_token")}`,
+    Authorization: `bearer ${AuthToken.get(`${process.env.CURRENT_TOKEN}`)}`,
   };
 
   useEffect(() => {
@@ -24,7 +19,7 @@ const GetAllProducts = () => {
 
   const fetchProducts = async () => {
     await axios
-      .get(`${URL_PRODUCT}`, {headers: headers})
+      .get(process.env.URL_PRODUCT, { headers: headers })
       .then((response) => {
         setAllProducts(response.data["hydra:member"]);
       })
@@ -39,7 +34,9 @@ const GetAllProducts = () => {
       <div>
         <div>
           <div>
-            <Link to={`${URL_PRODUCT_CREATE}`}>Créer un nouveau projet</Link>
+            <Link to={`${process.env.URL_PRODUCT_CREATE}`}>
+              Créer un nouveau projet
+            </Link>
           </div>
           <div>
             <table>
@@ -61,7 +58,7 @@ const GetAllProducts = () => {
                       <td>
                         <Link
                           className="text-blue-500"
-                          to={`${URL_PRODUCT_SHOW}/${product.id}`}
+                          to={`${process.env.URL_PRODUCT_SHOW}/${product.id}`}
                         >
                           Afficher
                         </Link>
@@ -70,7 +67,7 @@ const GetAllProducts = () => {
                           <>
                             <Link
                               className="text-green-500"
-                              to={`${URL_PRODUCT_EDIT}/${product.id}`}
+                              to={`${process.env.URL_PRODUCT_EDIT}/${product.id}`}
                             >
                               Editer
                             </Link>

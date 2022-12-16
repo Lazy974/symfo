@@ -1,6 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import { URL_PRODUCT } from "../../../middleware/environment";
+import process from "process";
 
 const DeleteProduct = (id) => {
   Swal.fire({
@@ -15,7 +15,7 @@ const DeleteProduct = (id) => {
   }).then((result) => {
     if (result.isConfirmed) {
       axios
-        .delete(`${URL_PRODUCT}/${id}`)
+        .delete(`${process.env.URL_PRODUCT}/${id}`)
         .then(function (response) {
           Swal.fire({
             icon: "success",

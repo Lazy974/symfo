@@ -3,12 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import DeleteProduct from "./deleteProduct";
-import {
-  URL_PRODUCT,
-  URL_PRODUCT_ALL,
-  URL_PRODUCT_EDIT,
-} from "../../../middleware/environment";
-import { token } from "../../../middleware/environment";
+import { AuthToken } from "../../../middleware/token/authToken";
 
 const ShowProduct = () => {
   const [product, getProduct] = useState({
@@ -21,12 +16,12 @@ const ShowProduct = () => {
   });
 
   const headers = {
-    Authorization: `bearer ${token.get("access_token")}`,
+    Authorization: `bearer ${AuthToken.get("access_token")}`,
   };
 
   useEffect(() => {
     axios
-      .get(`${URL_PRODUCT}/${product.id}`, { headers: headers })
+      .get(`${process.env.URL_PRODUCT}/${product.id}`, { headers: headers })
       .then((response) => {
         getProduct(response.data);
       })
@@ -40,7 +35,7 @@ const ShowProduct = () => {
       <h2>Projet {product.name}</h2>
       <div>
         <div>
-          <Link to={`${URL_PRODUCT_ALL}`}>Voir tous les projets</Link>
+          <Link to={`${process.env.URL_PRODUCT_ALL}`}>Voir tous les projets</Link>
         </div>
         <div>
           <b>Nom :</b>
@@ -51,7 +46,7 @@ const ShowProduct = () => {
           <p>{product.price}€</p>
         </div>
         <button>
-          <Link to={`${URL_PRODUCT_EDIT}/${product.id}`}>Editer</Link>
+          <Link to={`${process.env.URL_PRODUCT_EDIT}/${product.id}`}>Editer</Link>
         </button>
         <button onClick={() => DeleteProduct(product.id)}>Supprimer</button>
       </div>

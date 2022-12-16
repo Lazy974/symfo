@@ -3,19 +3,18 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { URL_USERS } from "../../../middleware/environment";
-import { token } from "../../../middleware/environment";
+import { AuthToken } from "../../../middleware/token/authToken";
 
 const Users = () => {
   const [users, getUsers] = useState([]);
 
   const headers = {
-    Authorization: `bearer ${token.get("access_token")}`,
+    Authorization: `bearer ${AuthToken.get("access_token")}`,
   };
 
   useEffect(() => {
     axios
-      .get(`${URL_USERS}`, {
+      .get(`${process.env.URL_USERS}`, {
         headers: headers,
       })
       .then((response) => {

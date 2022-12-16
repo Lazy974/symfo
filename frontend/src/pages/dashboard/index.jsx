@@ -5,7 +5,7 @@ const DashBoard = () => {
   return (
     <>
       <Navbar />
-      <h1>{window.user.email}</h1>
+      <h1>Bonjour {window.user.email} !</h1>
     </>
   );
 };
