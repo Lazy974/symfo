@@ -16,7 +16,7 @@ class DashBoardController extends AbstractController
     {
         return $this->render('dash_board/index.html.twig', [
             'controller_name' => 'DashBoardController',
-            'user' => $serializer->serialize($this->getUser(), 'jsonld')
+            'user' => $serializer->serialize($this->getUser(), 'jsonld'),
         ]);
     }
 }

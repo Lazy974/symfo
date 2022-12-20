@@ -11,8 +11,11 @@
         {% endblock %}
 
         {% block javascripts %}
+            <script>
+                window.user = {{ user|raw }};
+            </script>
             {{ encore_entry_script_tags('app') }}
-            {{ encore_entry_script_tags('apps') }}
+            {{ encore_entry_script_tags('twig') }}
               <script src="https://cdn.tailwindcss.com"></script>
         {% endblock %}
     </head>

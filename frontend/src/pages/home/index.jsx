@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../components/navbar";
 import { CookiesProvider } from "react-cookie";
 import { SetToken } from "../../middleware/token/setToken";
 
 const Home = () => {
   SetToken();
+  console.log(window.user)
   return (
     <CookiesProvider>
       <Navbar />

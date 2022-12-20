@@ -3,17 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'app_login')]
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    #[IsGranted('PUBLIC_ACCESS')]
+    public function index(AuthenticationUtils $authenticationUtils, SerializerInterface $serializer): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -25,11 +28,13 @@ class LoginController extends AbstractController
                 'controller_name' => 'LoginController',
                 'last_username' => $lastUsername,
                 'error'         => $error,
+                'user' => $serializer->serialize($this->getUser(), 'jsonld'),
             ]
         );
     }
 
     #[Route('/logout', name: 'app_logout')]
+    #[IsGranted('PUBLIC_ACCESS')]
     public function logout()
     {
         $this->redirectToRoute('app_home_page');

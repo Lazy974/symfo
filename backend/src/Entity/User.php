@@ -4,14 +4,20 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 #[ApiResource]
+#[Vich\Uploadable]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -30,6 +36,51 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $alias = null;
+
+    // #[Vich\UploadableField(mapping: 'users', fileNameProperty: 'image_name', size: 'image_size')]
+    #[Vich\UploadableField(mapping: 'users', fileNameProperty: 'image_name', size: 'image_size')]
+    private ?File $image_file = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image_name = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $image_size = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updated_at = null;
+
+    public function __construct()
+    {
+        $this->image_name = new ArrayCollection();
+    }
+    
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     */
+    public function setImageFile(?File $image_file = null): void
+    {
+        $this->image_file = $image_file;
+
+        if (null !== $image_file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updated_at = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->image_file;
+    }
 
     public function getId(): ?int
     {
@@ -100,4 +151,88 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    public function getAlias(): ?string
+    {
+        return $this->alias;
+    }
+
+    public function setAlias(string $alias): self
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->image_name;
+    }
+
+    public function setImageName(?string $image_name): self
+    {
+        $this->image_name = $image_name;
+
+        return $this;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->image_size;
+    }
+
+    public function setImageSize(?int $image_size): self
+    {
+        $this->image_size = $image_size;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    // /**
+    //  * @return Collection<int, Applis>
+    //  */
+    // public function getApplis(): Collection
+    // {
+    //     return $this->applis;
+    // }
+
+    // public function addAppli(User $appli): self
+    // {
+    //     if (!$this->applis->contains($appli)) {
+    //         $this->applis[] = $appli;
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeAppli(User $appli): self
+    // {
+    //     $this->applis->removeElement($appli);
+
+    //     return $this;
+    // }
+
+    // public function getUpdateAt(): ?\DateTimeInterface
+    // {
+    //     return $this->updatedAt;
+    // }
+
+    // public function setUpdateAt(): self
+    // {
+    //     $this->updatedAt = new \DateTimeImmutable();
+
+    //     return $this;
+    // }
 }

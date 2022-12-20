@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import LogOut from "./logout";
 
 const User = () => {
   return (
@@ -16,7 +17,10 @@ const User = () => {
           <a href={"/dashboard"}>Dashboard</a>
         </li>
         <li>
-          <a href={"/logout"}>Déconnexion</a>
+          {/* <a href={"/logout"}>Déconnexion</a> */}
+          <button className="uppercase" onClick={() => LogOut()}>
+            Déconnexion
+          </button>
         </li>
       </ul>
     </nav>

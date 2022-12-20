@@ -3,8 +3,7 @@
 {% block title %}Hello HomePageController!{% endblock %}
 
 {% block body %}
-    <script>
-        window.user = {{ user|raw }};
-    </script>
+    <div {{ react_component('MyComponent', { 'fullName': 'Enrick' }) }}></div>
+    <div {{ react_component('navbar') }}></div>
     <div id="root"></div>
 {% endblock %}
